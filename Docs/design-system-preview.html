@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=360, initial-scale=1">
+<title>Qubators Design System BRIGHT v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;font-family:Inter,system-ui}body{background:#EDE9FE;margin:0;padding:12px;max-width:440px;margin:auto;color:#0A0A0A}
+.wrap{background:#fff;border:3px solid #0A0A0A;border-radius:20px;padding:16px;box-shadow:6px 6px 0 #0A0A0A}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin:22px 0 10px;background:#0A0A0A;color:#fff;display:inline-block;padding:4px 10px;border-radius:999px}
+.card{background:#fff;border:2px solid #0A0A0A;border-radius:16px;padding:12px;box-shadow:3px 3px 0 #0A0A0A;margin-bottom:10px}
+.pill{display:inline-block;font-size:12px;font-weight:800;padding:5px 12px;border-radius:999px;border:2px solid #0A0A0A}
+.o-new{background:#00E5FF;color:#00363D}.o-conf{background:#FFD600;color:#3A2E00}.o-proc{background:#7C4DFF;color:#fff}.o-del{background:#00E676;color:#003318}.o-can{background:#ECEFF1;color:#37474F}
+.dot{display:inline-block;width:10px;height:10px;border-radius:99px;margin-right:6px;border:2px solid #0A0A0A}.p-pend{background:#FF2D55}.p-part{background:#FFAB00}.p-paid{background:#00C853}.p-ref{background:#9CA3AF}
+.btn{display:block;width:100%;padding:15px;border-radius:14px;border:2px solid #0A0A0A;font-weight:800;font-size:16px;margin:8px 0;box-shadow:3px 3px 0 #0A0A0A}.btn-p{background:#5B00FF;color:#fff}.btn-hot{background:#FF4D00;color:#fff}.btn-wa{background:#1FDB63;color:#0A0A0A}
+.chip{border:2px solid #0A0A0A;border-radius:999px;padding:8px 14px;font-size:13px;font-weight:700;background:#fff;margin:0 6px 6px 0;display:inline-block}.chip.on{background:#0A0A0A;color:#fff}.chip.b1{background:#00E5FF}.chip.b2{background:#FFD600}
+.search,.inp{width:100%;padding:13px;border-radius:14px;border:2px solid #0A0A0A;font-size:15px;font-weight:600;margin:6px 0;background:#fff}
+.nav{background:#0A0A0A;color:#fff;display:flex;border-radius:16px;overflow:hidden;border:2px solid #0A0A0A}.nav div{flex:1;text-align:center;padding:13px 0;font-size:12px;font-weight:700}.nav .on{background:#5B00FF}
+.action{display:grid;grid-template-columns:1fr 1fr;gap:10px}.action .card b{font-size:22px;display:block}.c1{background:#00E5FF}.c2{background:#FFD600}.c3{background:#7C4DFF;color:#fff}.c4{background:#00E676}
+.toast{background:#0A0A0A;color:#fff;padding:13px;border-radius:14px;text-align:center;margin:10px 0;font-weight:800;border:2px solid #0A0A0A}
+.swatch{display:flex;gap:8px;flex-wrap:wrap}.sw{width:74px;height:60px;border-radius:14px;display:flex;align-items:end;justify-content:center;font-size:10px;font-weight:800;padding-bottom:6px;border:2px solid #0A0A0A}
+.empty{text-align:center;padding:22px;border:2px dashed #0A0A0A;border-radius:16px;background:#E0F7FF;font-weight:700}
+</style></head>
+<body>
+<div class="wrap">
+<h1 style="font-size:22px;font-weight:800;margin:0">Qubators ⚡ BRIGHT v2</h1>
+<p style="font-size:13px;font-weight:600">Sharp contrast • neon statuses • black borders • sunlight-ready</p>
+
+<h2>Colors</h2>
+<div class="swatch">
+<div class="sw" style="background:#5B00FF;color:#fff">Primary</div><div class="sw" style="background:#FF4D00;color:#fff">Hot</div><div class="sw" style="background:#00C2FF">Accent</div><div class="sw" style="background:#1FDB63">WA</div>
+<div class="sw" style="background:#FF2D55;color:#fff">Pending</div><div class="sw" style="background:#FFAB00">Partial</div><div class="sw" style="background:#00C853">Paid</div><div class="sw" style="background:#0A0A0A;color:#fff">Text</div>
+</div>
+
+<h2>Action cards</h2>
+<div class="action"><div class="card c1"><span>₦ PENDING</span><b>₦125,000</b></div><div class="card c2"><span>NEW</span><b>8</b></div><div class="card c3"><span>PROCESSING</span><b>4</b></div><div class="card c4"><span>FOLLOW-UPS</span><b>6</b></div></div>
+
+<h2>Order + Customer</h2>
+<div class="card"><b>Ada — 2 handbags ₦45,000</b><br><span class="pill o-proc">Processing</span> <span><span class="dot p-part"></span><b>Partial</b></span></div>
+<div class="card" style="background:#FFF9C4"><b>Sarah • 5 orders • ₦85,000</b><br><span class="pill o-conf">Follow-up tomorrow</span></div>
+
+<h2>Pills</h2>
+<div class="card"><span class="pill o-new">New</span> <span class="pill o-conf">Confirmed</span> <span class="pill o-proc">Processing</span> <span class="pill o-del">Delivered</span> <span class="pill o-can">Cancelled</span></div>
+
+<h2>Search + Filters</h2>
+<input class="search" placeholder="Search name, phone, product">
+<div><span class="chip on">All</span><span class="chip b1">New</span><span class="chip b2">Unpaid</span><span class="chip">Follow-up</span></div>
+
+<h2>Buttons</h2>
+<button class="btn btn-p">+ Add Order</button>
+<button class="btn btn-hot">⚡ Record Sale Fast</button>
+<button class="btn btn-wa">WhatsApp Sarah →</button>
+
+<h2>Inputs</h2>
+<input class="inp" placeholder="Customer name *"><input class="inp" placeholder="₦ Total *" style="background:#F3E8FF">
+
+<h2>Empty + Toast + Nav</h2>
+<div class="empty">No orders yet — Tap + , 30 seconds! ⚡</div>
+<div class="toast">✓ Order saved — Ada ₦45,000</div>
+<div class="nav"><div class="on">Home</div><div>Orders</div><div>Customers</div><div>+ Add</div></div>
+</div>
+</body></html>

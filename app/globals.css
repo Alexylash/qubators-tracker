@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-app: #f5f3ff;
+  --ink: #0a0a0a;
+  --brand: #5b00ff;
+  --hot: #ff4d00;
+  --accent: #00c2ff;
+  --wa: #1fdb63;
+  /* solid colors only - no gradients */
+}
+
+body {
+  background: var(--bg-app);
+  color: var(--ink);
+}
