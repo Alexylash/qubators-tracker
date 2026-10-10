@@ -4,6 +4,8 @@ node_modules/
 out/
 .env.local
 *.log
+public/uploads/
+backups/
 tsconfig.tsbuildinfo
 next-env.d.ts
 
