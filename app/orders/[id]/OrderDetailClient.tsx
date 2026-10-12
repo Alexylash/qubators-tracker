@@ -11,8 +11,8 @@ const PAYMENTS = ['pending', 'partial', 'paid', 'refunded'];
 
 function proofUrl(key: string): string {
   if (key.startsWith('http')) return key;
-  if (key.startsWith('uploads/')) return `/api/files/${key}`;
-  return key;
+  // Both local (uploads/...) and R2 (proofs/...) serve via the authed files route
+  return `/api/files/${key}`;
 }
 
 export default function OrderDetailClient({ data }: { data: any }) {
