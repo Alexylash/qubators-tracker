@@ -21,6 +21,9 @@ export default function OrderDetailClient({ data }: { data: any }) {
   const [paidInput, setPaidInput] = useState('');
   const [msg, setMsg] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [paystackRef, setPaystackRef] = useState('');
+  const [verifying, setVerifying] = useState(false);
+  const [verifyMsg, setVerifyMsg] = useState('');
   const customer = data.customer;
 
   async function patch(body: Record<string, unknown>) {
@@ -53,6 +56,28 @@ export default function OrderDetailClient({ data }: { data: any }) {
       setMsg(e instanceof Error ? e.message : 'Upload failed');
     } finally {
       setUploading(false);
+    }
+  }
+
+  async function verifyPaystack() {
+    setVerifyMsg('');
+    setVerifying(true);
+    try {
+      const res = await fetch('/api/payments/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderId: order.id, reference: paystackRef })
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || 'Verification failed');
+      setOrder(json.order);
+      setPaystackRef('');
+      setVerifyMsg(`Confirmed ${koboToNaira(json.receivedKobo)} via ${json.channel ?? 'Paystack'} ✓`);
+      router.refresh();
+    } catch (e) {
+      setVerifyMsg(e instanceof Error ? e.message : 'Verification failed');
+    } finally {
+      setVerifying(false);
     }
   }
 
@@ -133,6 +158,30 @@ export default function OrderDetailClient({ data }: { data: any }) {
             />
           </div>
           {uploading && <p className="text-xs font-bold mt-1">Uploading…</p>}
+        </div>
+        <div className="mt-3">
+          <b className="text-sm">PAYSTACK VERIFY</b>
+          {order.paystackRef ? (
+            <p className="text-xs font-bold mt-1">Verified ref: {order.paystackRef}</p>
+          ) : (
+            <p className="text-xs font-semibold text-gray-600">Paste reference from customer receipt.</p>
+          )}
+          <div className="flex gap-2 mt-2">
+            <input
+              className="flex-1 p-2 rounded-xl border-2 border-ink text-sm font-semibold"
+              placeholder="e.g. T1234567890abc"
+              value={paystackRef}
+              onChange={(e) => setPaystackRef(e.target.value)}
+            />
+            <button
+              className="bg-[#00C2FF] font-extrabold px-3 rounded-xl border-2 border-ink"
+              onClick={() => paystackRef.trim() && verifyPaystack()}
+              disabled={verifying}
+            >
+              {verifying ? '…' : 'Verify'}
+            </button>
+          </div>
+          {verifyMsg && <p className="text-xs font-bold mt-1">{verifyMsg}</p>}
         </div>
       </div>
 

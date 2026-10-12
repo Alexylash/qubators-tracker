@@ -77,6 +77,7 @@ export const orders = pgTable('orders', {
   deliveryInfo: text('delivery_info'),
   source: text('source').default('whatsapp'),
   proofR2Key: text('proof_r2_key'),
+  paystackRef: text('paystack_ref'),
   orderDate: date('order_date').defaultNow(),
   followUpDate: date('follow_up_date'),
   followUpReason: text('follow_up_reason'),

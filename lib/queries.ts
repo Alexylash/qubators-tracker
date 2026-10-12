@@ -116,6 +116,7 @@ export async function updateOrder(
     orderStatus: string;
     paymentStatus: string;
     amountPaid: string | number;
+    amountPaidKobo: number; // direct kobo (Paystack already sends kobo)
     deliveryInfo: string;
     followUpDate: string;
     followUpReason: string;
@@ -123,6 +124,7 @@ export async function updateOrder(
     qty: number;
     variation: string;
     proofR2Key: string;
+    paystackRef: string;
   }>
 ) {
   const sellerId = await getSellerId();
@@ -145,6 +147,7 @@ export async function updateOrder(
     values.paymentStatus = patch.paymentStatus;
   }
   if (patch.amountPaid !== undefined) values.amountPaid = nairaToKobo(patch.amountPaid);
+  if (patch.amountPaidKobo !== undefined) values.amountPaid = Math.max(0, Math.round(patch.amountPaidKobo));
   if (patch.deliveryInfo !== undefined) values.deliveryInfo = patch.deliveryInfo || null;
   if (patch.followUpDate !== undefined) values.followUpDate = patch.followUpDate || null;
   if (patch.followUpReason !== undefined) values.followUpReason = patch.followUpReason || null;
@@ -152,9 +155,10 @@ export async function updateOrder(
   if (patch.qty !== undefined) values.qty = Math.max(1, Math.floor(patch.qty));
   if (patch.variation !== undefined) values.variation = patch.variation || null;
   if (patch.proofR2Key !== undefined) values.proofR2Key = patch.proofR2Key || null;
+  if (patch.paystackRef !== undefined) values.paystackRef = patch.paystackRef || null;
 
-  // Auto-derive partial: if amountPaid set without explicit paymentStatus, infer it
-  if (patch.amountPaid !== undefined && patch.paymentStatus === undefined) {
+  // Auto-derive partial: if amount set without explicit paymentStatus, infer it
+  if ((patch.amountPaid !== undefined || patch.amountPaidKobo !== undefined) && patch.paymentStatus === undefined) {
     const current = await getOrderWithCustomer(id);
     if (current) {
       const paid = values.amountPaid as number;
@@ -170,7 +174,7 @@ export async function updateOrder(
     .returning();
   const row = updated[0] ?? null;
   if (row) {
-    if (patch.amountPaid !== undefined || patch.paymentStatus !== undefined) {
+    if (patch.amountPaid !== undefined || patch.amountPaidKobo !== undefined || patch.paymentStatus !== undefined) {
       await trackEvent(sellerId, 'payment_updated', { status: row.paymentStatus });
     }
     if (patch.orderStatus === 'delivered') await trackEvent(sellerId, 'order_delivered', {});
