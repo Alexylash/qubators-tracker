@@ -218,7 +218,7 @@ Exit: 0 critical bugs, e2e green, Lighthouse PWA >90, performance >85 on Moto G4
 1. Product catalog (save T-shirt ₦15k S/M/L/XL, pick in Add Order)
 2. Payment proof (photo upload + Paystack/Transfer verify + Partial balance tracker)
 3. Delivery (rider assign, Lagos zones like Ikeja, status)
-4. Smart reminders (push via PWA + Termii SMS fallback for overdue)
+4. Smart reminders — DECIDED: free for beta (tap-to-send WhatsApp links already built, ₦0). Paid SMS (Arkesel/BulkSMSNigeria ~₦6/msg, sender-ID wait 1–4 wks) and push/VAPID only if beta sellers ask. Adapter plan: `lib/notify.ts` + per-vendor adapter.
 5. Segmentation + simple sales report (repeat, high-value, inactive, pending ₦ sum)
 6. Instagram/WhatsApp capture assist (share-to-Qubators, not auto-scrape for privacy)
 7. Team access (staff roles) → paid tier per PRD freemium: free basic, paid for catalog + analytics + team.
