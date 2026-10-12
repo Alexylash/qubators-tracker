@@ -9,6 +9,7 @@
     "lint": "next lint",
     "test": "vitest run",
     "backup": "node scripts/backup.cjs",
+    "db:start": "node scripts/db-start.cjs",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio"
   },

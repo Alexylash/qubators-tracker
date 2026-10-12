@@ -64,3 +64,19 @@ for (const s of [192, 512]) {
   fs.writeFileSync(f, png(s));
   console.log('WROTE ' + f + ' ' + fs.statSync(f).size + 'b');
 }
+// favicon.ico: single PNG-compressed 32px entry (all modern browsers accept)
+const small = png(32);
+const head = Buffer.alloc(6);
+head.writeUInt16LE(0, 0);
+head.writeUInt16LE(1, 2);
+head.writeUInt16LE(1, 4);
+const entry = Buffer.alloc(16);
+entry[0] = 32;
+entry[1] = 32;
+entry[4] = 1;
+entry.writeUInt16LE(32, 6);
+entry.writeUInt32LE(small.length, 8);
+entry.writeUInt32LE(6 + 16, 12);
+const ico = path.join(dir, 'favicon.ico');
+fs.writeFileSync(ico, Buffer.concat([head, entry, small]));
+console.log('WROTE ' + ico + ' ' + fs.statSync(ico).size + 'b');
